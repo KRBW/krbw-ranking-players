@@ -32,14 +32,14 @@ export const SearchResultText1 = styled.p`
 export const SearchResultText2 = styled.p``;
 
 export const Bar = styled.div`
-  width: 400px;
+  width: 380px;
   height: 0px;
   border-bottom: 1px solid white;
   margin: 20px 0;
 `;
 
 export const ListWrapper = styled.div`
-  min-width: 380px;
+  min-width: 340px;
 `;
 export const ListTitle = styled.h3`
   text-align: center;
