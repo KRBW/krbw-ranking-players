@@ -27,7 +27,6 @@ export default function Home() {
     setConvertedUUID(null);
     setStatus(null);
     const uuid = await nick2uuid(inputNick);
-    console.log(uuid);
     setConvertedUUID(uuid);
     if (uuid === "NULL" || uuid === "ERROR") {
       setStatus(null);
