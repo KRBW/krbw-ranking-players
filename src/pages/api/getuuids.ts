@@ -18,7 +18,7 @@ export default async function handler(
     // 정규 표현식으로 <p> 태그 안에 있는 텍스트 추출
     const regex = /<p>(.*?)<\/p>/;
     const match = regex.exec(text);
-    const extractedText = match ? match[1] : "";
+    const extractedText = match ? match[1].trim() : "";
 
     const uuidList = extractedText.split(" ");
 
