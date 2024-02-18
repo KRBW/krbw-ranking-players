@@ -1,9 +1,6 @@
 import Head from "next/head";
-import { Inter } from "next/font/google";
 import { useEffect, useState } from "react";
-import styled from "styled-components";
-
-const inter = Inter({ subsets: ["latin"] });
+import * as S from "@/styles/index.styled";
 
 export default function Home() {
   const [uuidList, setUuidList] = useState<string[]>([]);
@@ -35,38 +32,16 @@ export default function Home() {
           href="/favicon.ico"
         />
       </Head>
-      <Main className={`${inter.className}`}>
-        <ListWrapper>
-          <ListTitle>{`등록된 UUID 리스트 (총 ${uuidList.length}명)`}</ListTitle>
-          <ListUL>
+      <S.Main>
+        <S.ListWrapper>
+          <S.ListTitle>{`등록된 UUID 리스트 (총 ${uuidList.length}명)`}</S.ListTitle>
+          <S.ListUL>
             {uuidList.map((uuid) => {
-              return <ListLI key={uuid}>{uuid}</ListLI>;
+              return <S.ListLI key={uuid}>{uuid}</S.ListLI>;
             })}
-          </ListUL>
-        </ListWrapper>
-      </Main>
+          </S.ListUL>
+        </S.ListWrapper>
+      </S.Main>
     </>
   );
 }
-
-const Main = styled.main`
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  padding: 40px;
-`;
-
-const ListWrapper = styled.div`
-  min-width: 380px;
-`;
-const ListTitle = styled.h3`
-  text-align: center;
-  font-size: 26px;
-  margin-bottom: 14px;
-`;
-const ListUL = styled.ul``;
-const ListLI = styled.li`
-  border: 1px solid whitesmoke;
-  padding: 10px 8px;
-  text-align: center;
-`;
