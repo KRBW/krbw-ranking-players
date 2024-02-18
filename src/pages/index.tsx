@@ -62,8 +62,9 @@ export default function Home() {
           <S.SearchForm onSubmit={handleSearchBtn}>
             <S.SearchInput
               onChange={(event) => setInputNick(event.target.value)}
+              disabled={uuidList.length === 0}
             />
-            <S.SearchBtn>검색</S.SearchBtn>
+            <S.SearchBtn disabled={uuidList.length === 0}>검색</S.SearchBtn>
           </S.SearchForm>
           <S.SearchResultWrapper>
             <S.SearchResultText1>{`UUID: ${
