@@ -7,12 +7,15 @@ export default function Home() {
   const [convertedUUID, setConvertedUUID] = useState<string | null>(null);
   const [status, setStatus] = useState<boolean | null>(null);
 
+  const [searchPrevent, setSearchPrevent] = useState<boolean>(true);
+
   const [uuidList, setUuidList] = useState<string[]>([]);
 
   const getUUIDs = async () => {
     const response = await fetch("/api/getuuids");
     const json = await response.json();
     setUuidList(json.data);
+    setSearchPrevent(false);
   };
 
   const nick2uuid = async (nick: string): Promise<string> => {
@@ -24,8 +27,9 @@ export default function Home() {
 
   const handleSearchBtn = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setConvertedUUID(null);
+    setConvertedUUID("검색중...");
     setStatus(null);
+    setSearchPrevent(true);
     const uuid = await nick2uuid(inputNick);
     setConvertedUUID(uuid);
     if (uuid === "NULL" || uuid === "ERROR") {
@@ -33,6 +37,7 @@ export default function Home() {
     } else {
       setStatus(uuidList.indexOf(uuid) !== -1);
     }
+    setSearchPrevent(false);
   };
 
   useEffect(() => {
@@ -62,9 +67,9 @@ export default function Home() {
           <S.SearchForm onSubmit={handleSearchBtn}>
             <S.SearchInput
               onChange={(event) => setInputNick(event.target.value)}
-              disabled={uuidList.length === 0}
+              disabled={searchPrevent}
             />
-            <S.SearchBtn disabled={uuidList.length === 0}>검색</S.SearchBtn>
+            <S.SearchBtn disabled={searchPrevent}>검색</S.SearchBtn>
           </S.SearchForm>
           <S.SearchResultWrapper>
             <S.SearchResultText1>{`UUID: ${
